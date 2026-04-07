@@ -87,7 +87,8 @@ def auth_callback(state: str, code: str, request: Request):
         flow.fetch_token(code=code)
         with open('token.json', 'w') as f:
             f.write(flow.credentials.to_json())
-        return RedirectResponse("http://localhost:5173") # Redirect back to React UI
+        frontend_url = os.environ.get("FRONTEND_URL", "http://localhost:5173")
+        return RedirectResponse(frontend_url) # Redirect back to React UI
     except Exception as e:
         logger.error(f"Auth error: {str(e)}")
         return {"error": "Authentication failed", "details": str(e)}
