@@ -43,7 +43,7 @@ SCOPES = [
     'https://www.googleapis.com/auth/userinfo.email',
     'openid'
 ]
-CLIENT_SECRETS_FILE = "credentials.json"
+CLIENT_SECRETS_FILE = "/app/secrets/credentials.json" if os.path.exists("/app/secrets/credentials.json") else "credentials.json"
 
 from google.auth.transport.requests import Request as AuthRequest
 
